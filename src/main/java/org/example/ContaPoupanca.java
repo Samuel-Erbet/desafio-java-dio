@@ -1,18 +1,33 @@
 package org.example;
 
-public class ContaPoupanca {
-    private int agencia;
-    private int numero;
-    private double saldo;
+public class ContaPoupanca extends Conta {
+
     private double taxa;
 
-    public void sacar(){
-
+    public double getTaxa() {
+        return taxa;
     }
-    public void depositar(){
 
+    public void setTaxa(double taxa) {
+        this.taxa = taxa;
     }
-    public void transferir(){
 
+    public ContaPoupanca(int agencia, int numero, double saldo, double taxa) {
+        this.taxa = taxa;
+        this.saldo = saldo;
+        this.numero = numero;
+        this.agencia = agencia;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "ContaPoupanca{" +
+                "taxa=" + taxa +
+                ", agencia=" + agencia +
+                ", numero=" + numero +
+                ", saldo=" + saldo +
+                '}';
     }
 }

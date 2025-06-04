@@ -1,18 +1,12 @@
 package org.example;
 
-public class ContaCorrente {
-    private int agencia;
-    private int numero;
-    private double saldo;
+public class ContaCorrente extends Conta{
 
-    public void sacar(){
-
+    public ContaCorrente(int agencia, int numero, double saldo){
+        this.agencia = agencia;
+        this.numero = numero;
+        this.saldo = saldo;
     }
-    public void depositar(){
 
-    }
-    public void transferir(){
-
-    }
 
 }
