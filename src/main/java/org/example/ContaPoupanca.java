@@ -2,22 +2,19 @@ package org.example;
 
 public class ContaPoupanca extends Conta {
 
-    private double taxa;
+    private double taxa = 0.73;
 
     public double getTaxa() {
         return taxa;
     }
 
-    public void setTaxa(double taxa) {
-        this.taxa = taxa;
-    }
 
-    public ContaPoupanca(int agencia, int numero, double saldo, double taxa) {
-        this.taxa = taxa;
-        this.saldo = saldo;
+    public ContaPoupanca(int agencia, int numero, double saldo) {
+        this.saldo = saldo * taxa;
         this.numero = numero;
         this.agencia = agencia;
     }
+
 
 
 

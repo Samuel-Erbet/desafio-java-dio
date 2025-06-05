@@ -1,13 +1,22 @@
 package org.example;
 
+import javax.security.auth.login.LoginContext;
+
 public class Conta{
     protected int agencia;
     protected int numero;
     protected double saldo;
 
-    public Conta(){
+    public Conta(int agencia, int numero,  double saldo){
+        this.saldo = saldo;
+        this.numero = numero;
+        this.agencia = agencia;
+    }
+
+    public Conta() {
 
     }
+
 
     public int getAgencia() {
         return agencia;
@@ -33,13 +42,47 @@ public class Conta{
         this.saldo = saldo;
     }
 
-    public void sacar(){
 
+    public void sacar(double valor){
+        try {
+            if (valor > saldo) {
+                System.out.println("erro, saldo insuficiente");
+            } else {
+                this.saldo = saldo - valor;
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("insira um numero");
+        }
     }
-    public void depositar(){
 
+
+    public void depositar(double valor){
+        try {
+
+            this.saldo = saldo + valor;
+
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("insira um numero");
+        }
     }
-    public void transferir(){
 
+    public void transferir(Conta conta, double valor){
+        try {
+            if (valor > saldo) {
+
+                System.out.println("erro, saldo insuficiente");
+
+            } else {
+
+                if (valor > 0) {
+                    this.saldo = saldo - valor;
+                    conta.setSaldo(conta.getSaldo() + valor);
+                } else {
+                    System.out.println("erro, valor inválido");
+                }
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("insira um numero");
+        }
     }
 }

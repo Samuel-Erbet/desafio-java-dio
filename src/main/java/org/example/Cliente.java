@@ -6,7 +6,6 @@ public class Cliente {
 
     public Cliente(String nome, Conta conta) {
         this.nome = nome;
-        this.conta = conta;
     }
 
     public String getNome() {
