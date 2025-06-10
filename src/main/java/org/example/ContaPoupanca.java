@@ -10,6 +10,7 @@ public class ContaPoupanca extends Conta {
 
 
     public ContaPoupanca(int agencia, int numero, double saldo) {
+        this.taxa = taxa;
         this.saldo = saldo * taxa;
         this.numero = numero;
         this.agencia = agencia;

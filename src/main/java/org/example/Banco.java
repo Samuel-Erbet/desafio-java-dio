@@ -39,19 +39,79 @@ public class Banco {
         this.login.put(cliente, contaPoupanca);
     }
 
+    public static int mostrarMenu(Scanner sc) {
+        System.out.println("===== MENU BANCO =====");
+        System.out.println("1 - Criar Conta Corrente");
+        System.out.println("2 - Criar Conta Poupança");
+        System.out.println("3 - Depositar");
+        System.out.println("4 - Sacar");
+        System.out.println("5 - Transferir");
+        System.out.println("6 - Mostrar Contas");
+        System.out.println("0 - Sair");
+        System.out.print("Escolha uma opção: ");
+        return sc.nextInt();
+    }
 
     public static void main(String[] args) {
-        Conta conta = new ContaCorrente(1984,12,1245.04);
-        Cliente samuel = new Cliente("samuel", conta);
-        Banco itau = new Banco("itau");
+        /*
+        Scanner sc = new Scanner(System.in);
+        int repeticao = 0;
 
-        Conta conta2 = new ContaCorrente(100,124,1235.00);
-        Cliente claudio = new Cliente("claudio", conta2);
+        while (repeticao == 0){
+            Object opcao = mostrarMenu(sc);
+            int agencia = 0;
+            int numero = 0;
+            double saldo = 0;
+            String nome = "";
 
-        conta.depositar(500);
-        conta.sacar(100);
-        conta.transferir(conta2,100);
+            switch (opcao){
+                case 1:
+                    System.out.println("inisra o seu nome");
+                    nome = sc.next();
+
+                    System.out.println("insira o numero da agencia");
+                    agencia = sc.nextInt();
+
+                    System.out.println("insira o numero");
+                    numero = sc.nextInt();
+
+                    System.out.println("insira o saldo");
+                    saldo = sc.nextDouble();
+
+                    Conta contaCorrente = new ContaCorrente(agencia,numero,saldo);
+
+                case 2:
+                    System.out.println("inisra o seu nome");
+                    nome = sc.nextLine();
+
+                    System.out.println("insira o numero da agencia");
+                    agencia = sc.nextInt();
+
+                    System.out.println("insira o numero");
+                    numero = sc.nextInt();
+
+                    System.out.println("insira o saldo");
+                    saldo = sc.nextDouble();
+
+                    Conta contaPoupanca = new ContaPoupanca(agencia, numero, saldo);
+
+                case 3:
+                    System.out.println("insira o nome de quem vai receber");
+                    String nomeCliente = sc.nextLine();
+
+                    System.out.println("insira o valor do deposito");
+                    double deposito = sc.nextDouble();
 
 
+            }
+*/
+        Cliente cleiton = new Cliente("cleiton", new Conta(1321,123,12513.34));
+        Object res= cleiton.getConta().getSaldo();
+
+        Cliente samuel = new Cliente("samuek", new Conta(1321,123,12513.34));
+        samuel.getConta().depositar(123,cleiton);
+
+
+        }
     }
-}
+
