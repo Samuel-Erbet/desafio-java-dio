@@ -6,6 +6,7 @@ public class Cliente {
 
     public Cliente(String nome, Conta conta) {
         this.nome = nome;
+        this.conta = conta;
     }
 
     public String getNome() {
@@ -22,5 +23,13 @@ public class Cliente {
 
     public void setConta(Conta conta) {
         this.conta = conta;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", conta=" + conta +
+                '}';
     }
 }
