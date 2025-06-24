@@ -11,6 +11,8 @@ public class Banco {
         this.login = new HashMap<>();
     }
 
+
+
     public String getNome() {
         return nome;
     }
@@ -29,13 +31,13 @@ public class Banco {
 
     public void criarContaCorrente(Cliente cliente, int agencia, int numero, double saldo){
          ContaCorrente contaCorrente = new ContaCorrente(agencia, numero, saldo);
-
+         cliente.setConta(contaCorrente);
          this.login.put(cliente, contaCorrente);
     }
 
     public void criarContaPoupança(Cliente cliente,int agencia, int numero, double saldo){
         ContaPoupanca contaPoupanca = new ContaPoupanca(agencia, numero, saldo);
-
+        cliente.setConta(contaPoupanca);
         this.login.put(cliente, contaPoupanca);
     }
 
@@ -55,9 +57,11 @@ public class Banco {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Banco banco = new Banco("santander");
         int repeticao = 10;
-        List<Cliente> clientes = new ArrayList<>();
-        Cliente cliente = null;
+
+        Cliente clienteLogado = null;
+
 
         while (repeticao != 0) {
             int opcao = mostrarMenu(sc);
@@ -82,8 +86,10 @@ public class Banco {
                     System.out.println("insira o saldo");
                     double saldo = sc.nextDouble();
 
-                    cliente = new Cliente (nome, new ContaCorrente(agencia, numero, saldo));
-                    clientes.add(cliente);
+                    Cliente clienteCC = new Cliente(nome);
+                    banco.criarContaCorrente(clienteCC, agencia, numero, saldo);
+                    clienteLogado = clienteCC;
+                    System.out.println("Conta Corrente criada!");
                     break;
 
                 case 2:
@@ -99,15 +105,16 @@ public class Banco {
                     System.out.println("insira o saldo");
                     saldo = sc.nextDouble();
 
-                    Cliente contaPoupanca = new Cliente(nome, new ContaPoupanca(agencia, numero, saldo));
-                    clientes.add(contaPoupanca);
+                    Cliente contaPoupanca = new Cliente(nome);
+                    banco.criarContaPoupança(contaPoupanca, agencia, numero, saldo);
+                    clienteLogado = contaPoupanca;
                     break;
 
                 case 3:
                     System.out.println("insira o valor que quer inserir");
                     double valor = sc.nextDouble();
 
-                    cliente.getConta().depositar(valor, cliente);
+                    banco.getLogin().get(clienteLogado).depositar(valor,clienteLogado);
                     System.out.println("voce depositou "+valor+" reais");
                     break;
 
@@ -115,7 +122,7 @@ public class Banco {
                     System.out.println("insira o valor que quer sacar");
                     valor = sc.nextDouble();
 
-                    cliente.getConta().sacar(valor);
+                    banco.getLogin().get(clienteLogado).sacar(valor);
                     System.out.println("você sacou "+valor+" reais");
                     break;
 
@@ -126,12 +133,16 @@ public class Banco {
                     System.out.println("insira o valor do deposito");
                     double deposito = sc.nextDouble();
 
-                    if (cliente == null){
+                    if (clienteLogado == null){
                         System.out.println("erro conta invalida");
                     } else {
-                        for (Cliente i : clientes){
-                            if (nomeCliente.equals(cliente.getNome())){
-                                cliente.getConta().transferir(i.getConta(), deposito);
+                        for (Cliente i : banco.getLogin().keySet()){
+                            if (i.getNome().equals(nomeCliente)){
+
+                                Conta cOrigem = banco.getLogin().get(clienteLogado);
+                                Conta cDestino = banco.getLogin().get(i);
+
+                                cOrigem.transferir(cDestino, deposito);
                                 System.out.println("transferencia concluida");
                                 break;
                             }
@@ -141,13 +152,15 @@ public class Banco {
                     break;
 
                 case 6:
-                    System.out.println(clientes);
+                    System.out.println(banco.getLogin().keySet());
                     break;
 
                 }
 
 
             }
+        sc.close();
+
         }
     }
 

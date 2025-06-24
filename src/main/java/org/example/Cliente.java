@@ -4,9 +4,8 @@ public class Cliente {
     private String nome;
     private Conta conta;
 
-    public Cliente(String nome, Conta conta) {
+    public Cliente(String nome) {
         this.nome = nome;
-        this.conta = conta;
     }
 
     public String getNome() {
